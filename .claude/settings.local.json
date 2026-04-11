@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "WebFetch(domain:github.com)",
-      "Bash(wc -l \"/d/Jane/Job Search/Github/credit-risk-portfolio_bank/4. Expected Loss Engine/notebooks\"/*.ipynb)"
-    ]
-  }
-}
