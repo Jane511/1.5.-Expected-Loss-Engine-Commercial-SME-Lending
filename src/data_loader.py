@@ -145,7 +145,7 @@ def _load_aligned_portfolio_anchor(
                 "sibling_bundle",
                 "portfolio",
                 "loaded" if overlap else "available_not_aligned",
-                "Loaded aligned sibling/local portfolio candidate." if overlap else "Portfolio candidate exists but does not align to the sibling facility universe.",
+                "Loaded aligned upstream/local portfolio candidate." if overlap else "Portfolio candidate exists but does not align to the selected facility universe.",
                 path=path,
                 facility_count=len(portfolio_df),
                 shared_facility_count=len(overlap),
@@ -177,7 +177,7 @@ def _load_aligned_portfolio_anchor(
                     "sibling_bundle",
                     "portfolio",
                     "generated",
-                    "Built portfolio anchor from aligned sibling EAD/PD exports.",
+                    "Built portfolio anchor from aligned upstream EAD and PD exports.",
                     facility_count=len(anchor),
                     shared_facility_count=len(anchor),
                 )
@@ -535,7 +535,7 @@ def _try_load_sibling_bundle(target_dir: Path) -> tuple[dict[str, pd.DataFrame |
                 "sibling_bundle",
                 "strategy",
                 "rejected",
-                f"Missing sibling source files: {missing_sources}",
+                f"Missing upstream source files: {missing_sources}",
             )
         )
         return None, rows
@@ -545,8 +545,8 @@ def _try_load_sibling_bundle(target_dir: Path) -> tuple[dict[str, pd.DataFrame |
 
     rows.extend(
         [
-            _source_row("sibling_bundle", "pd_final", "loaded", "Loaded sibling PD export.", path=pd_path, facility_count=len(pd_df)),
-            _source_row("sibling_bundle", "lgd_final", "loaded", "Loaded sibling LGD export.", path=lgd_path, facility_count=len(lgd_df)),
+            _source_row("sibling_bundle", "pd_final", "loaded", "Loaded upstream PD export.", path=pd_path, facility_count=len(pd_df)),
+            _source_row("sibling_bundle", "lgd_final", "loaded", "Loaded upstream LGD export.", path=lgd_path, facility_count=len(lgd_df)),
         ]
     )
 
@@ -560,7 +560,7 @@ def _try_load_sibling_bundle(target_dir: Path) -> tuple[dict[str, pd.DataFrame |
                 "sibling_bundle",
                 "strategy",
                 "rejected",
-                "Sibling PD and LGD exports do not share facility_id values.",
+                "Upstream PD and LGD exports do not share facility_id values.",
                 shared_facility_count=0,
             )
         )
@@ -576,7 +576,7 @@ def _try_load_sibling_bundle(target_dir: Path) -> tuple[dict[str, pd.DataFrame |
                 "sibling_bundle",
                 "ead_final",
                 "loaded" if ead_shared else "available_not_aligned",
-                "Loaded sibling EAD export." if ead_shared else "Sibling EAD export exists but does not align to the selected facility universe.",
+                "Loaded upstream EAD export." if ead_shared else "Upstream EAD export exists but does not align to the selected facility universe.",
                 path=ead_path,
                 facility_count=len(ead_candidate),
                 shared_facility_count=len(ead_shared),
@@ -596,7 +596,7 @@ def _try_load_sibling_bundle(target_dir: Path) -> tuple[dict[str, pd.DataFrame |
                 "sibling_bundle",
                 "strategy",
                 "rejected",
-                "No local or sibling portfolio source could be aligned to the shared sibling facility universe.",
+                "No local or upstream portfolio source could be aligned to the selected shared facility universe.",
                 path=_candidate_path_string(candidate_paths),
                 shared_facility_count=len(shared_ids),
             )
@@ -612,7 +612,7 @@ def _try_load_sibling_bundle(target_dir: Path) -> tuple[dict[str, pd.DataFrame |
                 "sibling_bundle",
                 "industry_scores",
                 "loaded",
-                "Loaded sibling industry risk scores.",
+                "Loaded upstream industry risk scores.",
                 path=industry_scores_path,
                 facility_count=len(industry_scores),
             )
@@ -627,7 +627,7 @@ def _try_load_sibling_bundle(target_dir: Path) -> tuple[dict[str, pd.DataFrame |
                 "sibling_bundle",
                 "industry_downturns",
                 "loaded",
-                "Loaded sibling industry downturn overlays.",
+                "Loaded upstream industry downturn overlays.",
                 path=industry_downturns_path,
                 facility_count=len(industry_downturns),
             )
@@ -663,7 +663,7 @@ def _try_load_sibling_bundle(target_dir: Path) -> tuple[dict[str, pd.DataFrame |
             "sibling_bundle",
             "strategy",
             "selected",
-            "Using aligned sibling PD/LGD/EAD exports with a local or sibling portfolio anchor.",
+            "Using aligned upstream PD/LGD/EAD exports with a local or upstream portfolio anchor.",
             shared_facility_count=len(shared_ids),
         )
     )
@@ -773,7 +773,7 @@ def load_input_tables(
                 "selected_input_strategy": "sibling_bundle",
             }
         if strict_sibling_inputs:
-            raise ValueError("Strict sibling input mode was requested, but sibling repo exports could not be reconciled to a shared sibling portfolio universe.")
+            raise ValueError("Strict sibling input mode was requested, but the current upstream repo exports could not be reconciled to a shared facility universe.")
 
     local_bundle, local_rows = _try_load_local_bundle(target_dir)
     rows.extend(local_rows)
@@ -785,7 +785,7 @@ def load_input_tables(
         }
 
     demo_tables = build_demo_input_tables()
-    rows.append(_source_row("demo_generated", "strategy", "selected", "Generated an in-memory demo bundle because no coherent local or sibling input bundle was available."))
+    rows.append(_source_row("demo_generated", "strategy", "selected", "Generated an in-memory demo bundle because no coherent local or upstream-aligned input bundle was available."))
     rows.extend(
         [
             _source_row("demo_generated", "portfolio", "generated", "Generated demo portfolio in memory.", facility_count=len(demo_tables["portfolio"])),

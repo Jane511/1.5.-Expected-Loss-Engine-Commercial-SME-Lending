@@ -22,3 +22,4 @@ The output table shows, by product:
 
 This is deliberately simple. It is enough to show how expected loss can feed pricing support without pretending to be a full RAROC or capital-allocation engine.
 
+The pricing views are designed to feed `RAROC-pricing-and-return-hurdle` as a downstream commercial pricing and return-hurdle layer.

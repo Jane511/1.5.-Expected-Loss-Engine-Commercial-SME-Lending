@@ -102,16 +102,18 @@ def run_pipeline(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Run the Expected Loss Engine pipeline.")
+    parser = argparse.ArgumentParser(description="Run the expected-loss-engine-commercial pipeline.")
     parser.add_argument(
         "--refresh-demo-inputs",
         action="store_true",
         help="Regenerate the synthetic input files before running the pipeline.",
     )
     parser.add_argument(
+        "--strict-upstream-inputs",
         "--strict-sibling-inputs",
         action="store_true",
-        help="Fail if sibling repo exports cannot be reconciled to the local portfolio input.",
+        dest="strict_sibling_inputs",
+        help="Fail if the current upstream repo exports cannot be reconciled to the local portfolio input.",
     )
     args = parser.parse_args()
 

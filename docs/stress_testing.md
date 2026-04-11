@@ -25,3 +25,4 @@ The stress output reports:
 
 This framing is enough to support interview discussion around downturn overlays, migration risk, and sensitivity of revolving products to adverse conditions.
 
+The stress output is also shaped so `stress-testing-commercial` can consume expected-loss measures without relying on local workspace-specific folder conventions.
