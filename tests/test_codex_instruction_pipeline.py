@@ -1,13 +1,22 @@
 from pathlib import Path
-import sys
-ROOT=Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(ROOT))
-from src.codex_config import EXPECTED_OUTPUTS
+
 from src.codex_run_pipeline import run_pipeline
-def test_codex_instruction_pipeline_outputs(tmp_path: Path):
-    result=run_pipeline(project_root=tmp_path,persist=True)
-    for name in EXPECTED_OUTPUTS:
-        assert name in result["outputs"]
-        assert not result["outputs"][name].empty
-        assert (tmp_path/"outputs"/"tables"/name).exists()
-    assert result["validation"]["status"].all()
+
+
+def test_codex_instruction_pipeline_outputs():
+    root = Path("tests") / "_artifacts_codex"
+    result = run_pipeline(
+        input_dir=root / "data" / "input",
+        processed_dir=root / "data" / "processed",
+        output_dir=root / "outputs" / "tables",
+        refresh_demo_inputs=True,
+        persist=True,
+    )
+
+    assert not result["loan_level_el"].empty
+    assert not result["ifrs9_el"].empty
+    assert not result["concentration_summary"].empty
+    assert result["validation_report"]["status"].all()
+    assert (root / "outputs" / "tables" / "loan_level_el.csv").exists()
+    assert (root / "outputs" / "tables" / "ifrs9_stage_summary.csv").exists()
+    assert (root / "outputs" / "tables" / "pipeline_validation_report.csv").exists()

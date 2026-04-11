@@ -1,0 +1,10 @@
+industry,facility_count,borrower_count,total_ead,total_el,ead_share,el_share,hhi_contribution,breach_flag
+Construction,26,26,44708475.48,1071034.0,0.159104,0.179225,0.025314,False
+Health Care and Social Assistance,27,25,38545468.18,616358.5800000001,0.137171,0.103141,0.018816,False
+"Agriculture, Forestry and Fishing",20,19,38414621.24,600322.63,0.136706,0.100457,0.018689,False
+Manufacturing,20,20,30887440.55,1202084.07,0.109919,0.201155,0.012082,False
+"Transport, Postal and Warehousing",18,17,28177462.35,517305.66000000003,0.100275,0.086565,0.010055,False
+Retail Trade,19,18,27899793.19,522312.82,0.099287,0.087403,0.009858,False
+"Professional, Scientific and Technical Services",15,15,27461826.37,350717.52,0.097728,0.058689,0.009551,False
+Wholesale Trade,21,21,26343131.88,632502.32,0.093747,0.105842,0.008789,False
+Accommodation and Food Services,14,13,18564132.580000002,463268.75,0.066064,0.077523,0.004364,False

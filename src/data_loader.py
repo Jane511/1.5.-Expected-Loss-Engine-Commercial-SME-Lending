@@ -16,13 +16,175 @@ from .config import (
     REGION_FACTORS,
     RISK_GRADE_PD_LOOKUP,
     RISK_GRADE_TO_SCORE_BAND,
+    SIBLING_INPUT_CANDIDATES,
     STRESS_SCENARIOS,
 )
 from .utils import ensure_directories, save_dataframe
 
 
+REQUIRED_PORTFOLIO_COLUMNS = (
+    "facility_id",
+    "borrower_id",
+    "product_type",
+    "industry",
+    "limit_amount",
+    "drawn_balance",
+)
+
+
 def _resolve_input_dir(input_dir: str | Path | None) -> Path:
     return Path(input_dir) if input_dir is not None else INPUT_DIR
+
+
+def _source_row(
+    strategy: str,
+    source_key: str,
+    status: str,
+    detail: str,
+    path: str | Path | None = None,
+    facility_count: int | None = None,
+    shared_facility_count: int | None = None,
+) -> dict[str, object]:
+    return {
+        "strategy": strategy,
+        "source_key": source_key,
+        "status": status,
+        "detail": detail,
+        "path": str(path) if path is not None else "",
+        "facility_count": facility_count,
+        "shared_facility_count": shared_facility_count,
+    }
+
+
+def _find_existing_candidate(source_key: str) -> Path | None:
+    for candidate in SIBLING_INPUT_CANDIDATES.get(source_key, ()):
+        if candidate.exists():
+            return candidate
+    return None
+
+
+def _normalise_facility_frame(df: pd.DataFrame, fallback_id_column: str | None = None) -> pd.DataFrame:
+    out = df.copy()
+    if "facility_id" not in out.columns and fallback_id_column and fallback_id_column in out.columns:
+        out = out.rename(columns={fallback_id_column: "facility_id"})
+    if "facility_id" in out.columns:
+        out["facility_id"] = out["facility_id"].astype(str)
+    return out
+
+
+def _normalise_portfolio_frame(df: pd.DataFrame) -> pd.DataFrame:
+    out = _normalise_facility_frame(df)
+    rename_map = {
+        "limit": "limit_amount",
+        "drawn": "drawn_balance",
+        "revenue": "annual_revenue",
+        "maturity": "maturity_years",
+    }
+    out = out.rename(columns={key: value for key, value in rename_map.items() if key in out.columns})
+
+    if "maturity_years" in out.columns and "loan_term_months" not in out.columns:
+        maturity_years = pd.to_numeric(out["maturity_years"], errors="coerce")
+        out["loan_term_months"] = (maturity_years * 12).round().astype("Int64")
+
+    defaults = {
+        "borrower_name": pd.NA,
+        "region": pd.NA,
+        "interest_rate": pd.NA,
+        "loan_type": pd.NA,
+        "security_type": pd.NA,
+        "property_value": pd.NA,
+        "current_lvr": pd.NA,
+        "arrears_days": pd.NA,
+        "internal_risk_grade": pd.NA,
+        "watchlist_flag": pd.NA,
+        "borrower_strength": pd.NA,
+    }
+    for column, default in defaults.items():
+        if column not in out.columns:
+            out[column] = default
+    return out
+
+
+def _candidate_path_string(paths: tuple[Path, ...] | list[Path]) -> str:
+    return "; ".join(str(path) for path in paths)
+
+
+def _load_aligned_portfolio_anchor(
+    target_dir: Path,
+    shared_ids: set[str],
+    rows: list[dict[str, object]],
+    pd_df: pd.DataFrame,
+    ead_df: pd.DataFrame | None,
+) -> pd.DataFrame | None:
+    local_candidates: list[Path] = []
+    local_portfolio_path = target_dir / DEFAULT_INPUT_FILES["portfolio"].name
+    if local_portfolio_path.exists():
+        local_candidates.append(local_portfolio_path)
+
+    sibling_candidates = [path for path in SIBLING_INPUT_CANDIDATES.get("portfolio_sample", ()) if path.exists()]
+
+    for path in [*local_candidates, *sibling_candidates]:
+        portfolio_df = _normalise_portfolio_frame(pd.read_csv(path))
+        missing_columns = [column for column in REQUIRED_PORTFOLIO_COLUMNS if column not in portfolio_df.columns]
+        if missing_columns:
+            rows.append(
+                _source_row(
+                    "sibling_bundle",
+                    "portfolio",
+                    "rejected",
+                    f"Portfolio candidate is missing required columns: {missing_columns}",
+                    path=path,
+                    facility_count=len(portfolio_df),
+                )
+            )
+            continue
+
+        overlap = shared_ids & set(portfolio_df["facility_id"])
+        rows.append(
+            _source_row(
+                "sibling_bundle",
+                "portfolio",
+                "loaded" if overlap else "available_not_aligned",
+                "Loaded aligned sibling/local portfolio candidate." if overlap else "Portfolio candidate exists but does not align to the sibling facility universe.",
+                path=path,
+                facility_count=len(portfolio_df),
+                shared_facility_count=len(overlap),
+            )
+        )
+        if overlap:
+            return portfolio_df[portfolio_df["facility_id"].isin(shared_ids)].copy()
+
+    if ead_df is not None and not ead_df.empty:
+        anchor = _normalise_portfolio_frame(ead_df)
+        if "borrower_id" not in anchor.columns and "borrower_id" in pd_df.columns:
+            anchor = anchor.merge(pd_df[["facility_id", "borrower_id"]], on="facility_id", how="left", validate="one_to_one")
+        enrich_columns = [column for column in ["facility_id", "borrower_id", "product_type", "industry", "dscr"] if column in pd_df.columns]
+        if enrich_columns:
+            anchor = anchor.merge(pd_df[enrich_columns], on="facility_id", how="left", validate="one_to_one", suffixes=("", "_pd"))
+            for column in ["borrower_id", "product_type", "industry", "dscr"]:
+                pd_column = f"{column}_pd"
+                if pd_column in anchor.columns:
+                    if column not in anchor.columns:
+                        anchor[column] = anchor[pd_column]
+                    else:
+                        anchor[column] = anchor[column].fillna(anchor[pd_column])
+                    anchor = anchor.drop(columns=[pd_column])
+        missing_columns = [column for column in REQUIRED_PORTFOLIO_COLUMNS if column not in anchor.columns]
+        if not missing_columns:
+            anchor = anchor[anchor["facility_id"].isin(shared_ids)].copy()
+            rows.append(
+                _source_row(
+                    "sibling_bundle",
+                    "portfolio",
+                    "generated",
+                    "Built portfolio anchor from aligned sibling EAD/PD exports.",
+                    facility_count=len(anchor),
+                    shared_facility_count=len(anchor),
+                )
+            )
+            return anchor
+
+    return None
 
 
 def _assign_risk_grade(risk_score: float) -> str:
@@ -336,6 +498,13 @@ def build_demo_input_tables(n_facilities: int = N_FACILITIES, seed: int = RANDOM
     }
 
 
+def _persist_demo_bundle(target_dir: Path, tables: dict[str, pd.DataFrame]) -> None:
+    save_dataframe(tables["portfolio"], target_dir / DEFAULT_INPUT_FILES["portfolio"].name)
+    save_dataframe(tables["pd_final"], target_dir / DEFAULT_INPUT_FILES["pd_final"].name)
+    save_dataframe(tables["lgd_final"], target_dir / DEFAULT_INPUT_FILES["lgd_final"].name)
+    save_dataframe(tables["downturn_overlays"], target_dir / DEFAULT_INPUT_FILES["downturn_overlays"].name)
+
+
 def stage_demo_inputs(
     input_dir: str | Path | None = None,
     overwrite: bool = False,
@@ -350,21 +519,286 @@ def stage_demo_inputs(
         "lgd_final": target_dir / DEFAULT_INPUT_FILES["lgd_final"].name,
         "downturn_overlays": target_dir / DEFAULT_INPUT_FILES["downturn_overlays"].name,
     }
-    if overwrite or any(not path.exists() for path in file_map.values()):
-        tables = build_demo_input_tables(n_facilities=n_facilities, seed=seed)
-        save_dataframe(tables["portfolio"], file_map["portfolio"])
-        save_dataframe(tables["pd_final"], file_map["pd_final"])
-        save_dataframe(tables["lgd_final"], file_map["lgd_final"])
-        save_dataframe(tables["downturn_overlays"], file_map["downturn_overlays"])
+    if overwrite or all(not path.exists() for path in file_map.values()):
+        _persist_demo_bundle(target_dir, build_demo_input_tables(n_facilities=n_facilities, seed=seed))
     return file_map
 
 
-def load_input_tables(input_dir: str | Path | None = None, refresh_demo: bool = False) -> dict[str, pd.DataFrame]:
-    file_map = stage_demo_inputs(input_dir=input_dir, overwrite=refresh_demo)
+def _try_load_sibling_bundle(target_dir: Path) -> tuple[dict[str, pd.DataFrame | None] | None, list[dict[str, object]]]:
+    rows: list[dict[str, object]] = []
+    pd_path = _find_existing_candidate("pd_final")
+    lgd_path = _find_existing_candidate("lgd_final")
+    if pd_path is None or lgd_path is None:
+        missing_sources = [name for name, path in {"pd_final": pd_path, "lgd_final": lgd_path}.items() if path is None]
+        rows.append(
+            _source_row(
+                "sibling_bundle",
+                "strategy",
+                "rejected",
+                f"Missing sibling source files: {missing_sources}",
+            )
+        )
+        return None, rows
+
+    pd_df = _normalise_facility_frame(pd.read_csv(pd_path))
+    lgd_df = _normalise_facility_frame(pd.read_csv(lgd_path), fallback_id_column="loan_id")
+
+    rows.extend(
+        [
+            _source_row("sibling_bundle", "pd_final", "loaded", "Loaded sibling PD export.", path=pd_path, facility_count=len(pd_df)),
+            _source_row("sibling_bundle", "lgd_final", "loaded", "Loaded sibling LGD export.", path=lgd_path, facility_count=len(lgd_df)),
+        ]
+    )
+
+    pd_ids = set(pd_df["facility_id"]) if "facility_id" in pd_df.columns else set()
+    lgd_ids = set(lgd_df["facility_id"]) if "facility_id" in lgd_df.columns else set()
+    shared_ids = pd_ids & lgd_ids
+
+    if not shared_ids:
+        rows.append(
+            _source_row(
+                "sibling_bundle",
+                "strategy",
+                "rejected",
+                "Sibling PD and LGD exports do not share facility_id values.",
+                shared_facility_count=0,
+            )
+        )
+        return None, rows
+
+    ead_df: pd.DataFrame | None = None
+    ead_path = _find_existing_candidate("ead_final")
+    if ead_path is not None:
+        ead_candidate = _normalise_facility_frame(pd.read_csv(ead_path))
+        ead_shared = shared_ids & set(ead_candidate["facility_id"]) if "facility_id" in ead_candidate.columns else set()
+        rows.append(
+            _source_row(
+                "sibling_bundle",
+                "ead_final",
+                "loaded" if ead_shared else "available_not_aligned",
+                "Loaded sibling EAD export." if ead_shared else "Sibling EAD export exists but does not align to the selected facility universe.",
+                path=ead_path,
+                facility_count=len(ead_candidate),
+                shared_facility_count=len(ead_shared),
+            )
+        )
+        if ead_shared:
+            ead_df = ead_candidate[ead_candidate["facility_id"].isin(shared_ids)].copy()
+
+    filtered_pd = pd_df[pd_df["facility_id"].isin(shared_ids)].copy()
+    filtered_lgd = lgd_df[lgd_df["facility_id"].isin(shared_ids)].copy()
+    filtered_portfolio = _load_aligned_portfolio_anchor(target_dir, shared_ids, rows, filtered_pd, ead_df)
+    if filtered_portfolio is None:
+        candidate_paths = [target_dir / DEFAULT_INPUT_FILES["portfolio"].name]
+        candidate_paths.extend(path for path in SIBLING_INPUT_CANDIDATES.get("portfolio_sample", ()) if path.exists())
+        rows.append(
+            _source_row(
+                "sibling_bundle",
+                "strategy",
+                "rejected",
+                "No local or sibling portfolio source could be aligned to the shared sibling facility universe.",
+                path=_candidate_path_string(candidate_paths),
+                shared_facility_count=len(shared_ids),
+            )
+        )
+        return None, rows
+
+    industry_scores = None
+    industry_scores_path = _find_existing_candidate("industry_scores")
+    if industry_scores_path is not None:
+        industry_scores = pd.read_csv(industry_scores_path)
+        rows.append(
+            _source_row(
+                "sibling_bundle",
+                "industry_scores",
+                "loaded",
+                "Loaded sibling industry risk scores.",
+                path=industry_scores_path,
+                facility_count=len(industry_scores),
+            )
+        )
+
+    industry_downturns = None
+    industry_downturns_path = _find_existing_candidate("industry_downturns")
+    if industry_downturns_path is not None:
+        industry_downturns = pd.read_csv(industry_downturns_path)
+        rows.append(
+            _source_row(
+                "sibling_bundle",
+                "industry_downturns",
+                "loaded",
+                "Loaded sibling industry downturn overlays.",
+                path=industry_downturns_path,
+                facility_count=len(industry_downturns),
+            )
+        )
+
+    local_downturn_path = target_dir / DEFAULT_INPUT_FILES["downturn_overlays"].name
+    if local_downturn_path.exists():
+        downturn_overlays = pd.read_csv(local_downturn_path)
+        rows.append(
+            _source_row(
+                "sibling_bundle",
+                "downturn_overlays",
+                "loaded",
+                "Loaded local scenario overlay table.",
+                path=local_downturn_path,
+                facility_count=len(downturn_overlays),
+            )
+        )
+    else:
+        downturn_overlays = _build_downturn_overlay_table()
+        rows.append(
+            _source_row(
+                "sibling_bundle",
+                "downturn_overlays",
+                "generated",
+                "Generated default scenario overlay table because no local scenario file was supplied.",
+                facility_count=len(downturn_overlays),
+            )
+        )
+
+    rows.append(
+        _source_row(
+            "sibling_bundle",
+            "strategy",
+            "selected",
+            "Using aligned sibling PD/LGD/EAD exports with a local or sibling portfolio anchor.",
+            shared_facility_count=len(shared_ids),
+        )
+    )
     return {
-        "portfolio": pd.read_csv(file_map["portfolio"]),
-        "pd_final": pd.read_csv(file_map["pd_final"]),
-        "lgd_final": pd.read_csv(file_map["lgd_final"]),
+        "portfolio": filtered_portfolio.reset_index(drop=True),
+        "pd_final": filtered_pd.reset_index(drop=True),
+        "lgd_final": filtered_lgd.reset_index(drop=True),
+        "ead_final": ead_df.reset_index(drop=True) if ead_df is not None else None,
+        "industry_scores": industry_scores,
+        "industry_downturns": industry_downturns,
+        "downturn_overlays": downturn_overlays.reset_index(drop=True),
+    }, rows
+
+
+def _try_load_local_bundle(target_dir: Path) -> tuple[dict[str, pd.DataFrame | None] | None, list[dict[str, object]]]:
+    rows: list[dict[str, object]] = []
+    file_map = {
+        "portfolio": target_dir / DEFAULT_INPUT_FILES["portfolio"].name,
+        "pd_final": target_dir / DEFAULT_INPUT_FILES["pd_final"].name,
+        "lgd_final": target_dir / DEFAULT_INPUT_FILES["lgd_final"].name,
+        "downturn_overlays": target_dir / DEFAULT_INPUT_FILES["downturn_overlays"].name,
+    }
+    missing = [key for key, path in file_map.items() if not path.exists()]
+    if missing:
+        rows.append(
+            _source_row(
+                "local_input_bundle",
+                "strategy",
+                "skipped",
+                f"Missing local input files: {missing}",
+            )
+        )
+        return None, rows
+
+    bundle: dict[str, pd.DataFrame | None] = {
+        "portfolio": _normalise_portfolio_frame(pd.read_csv(file_map["portfolio"])),
+        "pd_final": _normalise_facility_frame(pd.read_csv(file_map["pd_final"])),
+        "lgd_final": _normalise_facility_frame(pd.read_csv(file_map["lgd_final"]), fallback_id_column="loan_id"),
         "downturn_overlays": pd.read_csv(file_map["downturn_overlays"]),
+        "ead_final": None,
+        "industry_scores": None,
+        "industry_downturns": None,
     }
 
+    optional_local_files = {
+        "ead_final": target_dir / "ead_by_facility.csv",
+        "industry_scores": target_dir / "industry_risk_score_table.csv",
+        "industry_downturns": target_dir / "downturn_overlay_table.csv",
+    }
+    for key, path in optional_local_files.items():
+        if path.exists():
+            frame = pd.read_csv(path)
+            if key == "ead_final":
+                frame = _normalise_facility_frame(frame)
+            bundle[key] = frame
+
+    rows.extend(
+        [
+            _source_row("local_input_bundle", "strategy", "selected", "Using local input bundle staged under data/input or the provided input_dir."),
+            _source_row("local_input_bundle", "portfolio", "loaded", "Loaded local portfolio master.", path=file_map["portfolio"], facility_count=len(bundle["portfolio"])),
+            _source_row("local_input_bundle", "pd_final", "loaded", "Loaded local PD final-layer file.", path=file_map["pd_final"], facility_count=len(bundle["pd_final"])),
+            _source_row("local_input_bundle", "lgd_final", "loaded", "Loaded local LGD final-layer file.", path=file_map["lgd_final"], facility_count=len(bundle["lgd_final"])),
+            _source_row("local_input_bundle", "downturn_overlays", "loaded", "Loaded local scenario overlay table.", path=file_map["downturn_overlays"], facility_count=len(bundle["downturn_overlays"])),
+        ]
+    )
+    return bundle, rows
+
+
+def load_input_tables(
+    input_dir: str | Path | None = None,
+    refresh_demo: bool = False,
+    prefer_sibling_inputs: bool = True,
+    strict_sibling_inputs: bool = False,
+) -> dict[str, pd.DataFrame | None]:
+    target_dir = _resolve_input_dir(input_dir)
+    ensure_directories(target_dir)
+    rows: list[dict[str, object]] = []
+
+    if refresh_demo:
+        demo_tables = build_demo_input_tables()
+        _persist_demo_bundle(target_dir, demo_tables)
+        rows.append(_source_row("demo_generated", "strategy", "selected", "Refreshed and persisted aligned demo inputs."))
+        rows.extend(
+            [
+                _source_row("demo_generated", "portfolio", "generated", "Generated demo portfolio.", path=target_dir / DEFAULT_INPUT_FILES["portfolio"].name, facility_count=len(demo_tables["portfolio"])),
+                _source_row("demo_generated", "pd_final", "generated", "Generated demo PD final layer.", path=target_dir / DEFAULT_INPUT_FILES["pd_final"].name, facility_count=len(demo_tables["pd_final"])),
+                _source_row("demo_generated", "lgd_final", "generated", "Generated demo LGD final layer.", path=target_dir / DEFAULT_INPUT_FILES["lgd_final"].name, facility_count=len(demo_tables["lgd_final"])),
+                _source_row("demo_generated", "downturn_overlays", "generated", "Generated demo scenario overlays.", path=target_dir / DEFAULT_INPUT_FILES["downturn_overlays"].name, facility_count=len(demo_tables["downturn_overlays"])),
+            ]
+        )
+        return {
+            **demo_tables,
+            "ead_final": None,
+            "industry_scores": None,
+            "industry_downturns": None,
+            "input_source_report": pd.DataFrame.from_records(rows),
+            "selected_input_strategy": "demo_generated",
+        }
+
+    if prefer_sibling_inputs:
+        sibling_bundle, sibling_rows = _try_load_sibling_bundle(target_dir)
+        rows.extend(sibling_rows)
+        if sibling_bundle is not None:
+            return {
+                **sibling_bundle,
+                "input_source_report": pd.DataFrame.from_records(rows),
+                "selected_input_strategy": "sibling_bundle",
+            }
+        if strict_sibling_inputs:
+            raise ValueError("Strict sibling input mode was requested, but sibling repo exports could not be reconciled to a shared sibling portfolio universe.")
+
+    local_bundle, local_rows = _try_load_local_bundle(target_dir)
+    rows.extend(local_rows)
+    if local_bundle is not None:
+        return {
+            **local_bundle,
+            "input_source_report": pd.DataFrame.from_records(rows),
+            "selected_input_strategy": "local_input_bundle",
+        }
+
+    demo_tables = build_demo_input_tables()
+    rows.append(_source_row("demo_generated", "strategy", "selected", "Generated an in-memory demo bundle because no coherent local or sibling input bundle was available."))
+    rows.extend(
+        [
+            _source_row("demo_generated", "portfolio", "generated", "Generated demo portfolio in memory.", facility_count=len(demo_tables["portfolio"])),
+            _source_row("demo_generated", "pd_final", "generated", "Generated demo PD final layer in memory.", facility_count=len(demo_tables["pd_final"])),
+            _source_row("demo_generated", "lgd_final", "generated", "Generated demo LGD final layer in memory.", facility_count=len(demo_tables["lgd_final"])),
+            _source_row("demo_generated", "downturn_overlays", "generated", "Generated demo scenario overlays in memory.", facility_count=len(demo_tables["downturn_overlays"])),
+        ]
+    )
+    return {
+        **demo_tables,
+        "ead_final": None,
+        "industry_scores": None,
+        "industry_downturns": None,
+        "input_source_report": pd.DataFrame.from_records(rows),
+        "selected_input_strategy": "demo_generated",
+    }

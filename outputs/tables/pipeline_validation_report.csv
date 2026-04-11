@@ -1,25 +1,16 @@
 check_name,status,detail
-required_output::expected_loss_by_facility.csv,True,present and non-empty
-required_output::expected_loss_by_borrower.csv,True,present and non-empty
-required_output::expected_loss_by_segment.csv,True,present and non-empty
-required_output::portfolio_expected_loss.csv,True,present and non-empty
-required_output::scenario_weighted_ecl.csv,True,present and non-empty
-non_negative::expected_loss_by_facility.csv::pd,True,all values non-negative
-non_negative::expected_loss_by_facility.csv::lgd,True,all values non-negative
-non_negative::expected_loss_by_facility.csv::ead,True,all values non-negative
-non_negative::expected_loss_by_facility.csv::expected_loss_12m,True,all values non-negative
-non_negative::expected_loss_by_facility.csv::lifetime_pd,True,all values non-negative
-non_negative::expected_loss_by_facility.csv::expected_loss_lifetime,True,all values non-negative
-non_negative::expected_loss_by_borrower.csv::total_ead,True,all values non-negative
-non_negative::expected_loss_by_borrower.csv::expected_loss_12m,True,all values non-negative
-non_negative::expected_loss_by_borrower.csv::expected_loss_lifetime,True,all values non-negative
-non_negative::expected_loss_by_segment.csv::total_ead,True,all values non-negative
-non_negative::expected_loss_by_segment.csv::expected_loss_12m,True,all values non-negative
-non_negative::expected_loss_by_segment.csv::expected_loss_lifetime,True,all values non-negative
-non_negative::portfolio_expected_loss.csv::total_ead,True,all values non-negative
-non_negative::portfolio_expected_loss.csv::expected_loss_12m,True,all values non-negative
-non_negative::portfolio_expected_loss.csv::expected_loss_lifetime,True,all values non-negative
-non_negative::scenario_weighted_ecl.csv::pd_multiplier,True,all values non-negative
-non_negative::scenario_weighted_ecl.csv::lgd_multiplier,True,all values non-negative
-non_negative::scenario_weighted_ecl.csv::scenario_expected_loss,True,all values non-negative
-non_negative::scenario_weighted_ecl.csv::weighted_expected_loss,True,all values non-negative
+required_frame::loan_level_el,True,Loan-level expected loss dataset present and non-empty.
+required_frame::segment_summary,True,Segment summary present and non-empty.
+required_frame::portfolio_summary,True,Portfolio summary present and non-empty.
+required_frame::pricing_table,True,Pricing summary present and non-empty.
+required_frame::stress_results,True,Stress-testing summary present and non-empty.
+required_frame::ifrs9_el,True,IFRS 9 facility table present and non-empty.
+required_frame::ifrs9_stage_summary,True,IFRS 9 stage summary present and non-empty.
+required_frame::concentration_summary,True,Concentration summary present and non-empty.
+expected_loss_non_negative,True,Expected loss is non-negative for every facility.
+pd_final_between_zero_and_one,True,"PD values are within [0, 1]."
+lgd_final_between_zero_and_one,True,"LGD values are within [0, 1]."
+ead_non_negative,True,EAD is non-negative for every facility.
+ifrs9_stage_values_valid,True,"Observed IFRS 9 stages: [1, 2]"
+stress_has_base_mild_severe,True,"Stress scenarios include base, mild, and severe."
+input_strategy_selected,True,sibling_bundle

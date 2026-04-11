@@ -1,0 +1,10 @@
+strategy,source_key,status,detail,path,facility_count,shared_facility_count
+sibling_bundle,pd_final,loaded,Loaded sibling PD export.,D:\Jane\Job Search\Github\credit-risk-portfolio_bank\credit risk models commercial\PD and score card commercial\outputs\tables\pd_model_output.csv,6.0,
+sibling_bundle,lgd_final,loaded,Loaded sibling LGD export.,D:\Jane\Job Search\Github\credit-risk-portfolio_bank\credit risk models commercial\LG commercial\outputs\tables\downturn_lgd_output.csv,6.0,
+sibling_bundle,ead_final,loaded,Loaded sibling EAD export.,D:\Jane\Job Search\Github\credit-risk-portfolio_bank\credit risk models commercial\EAD CCF commercial\outputs\tables\ead_by_facility.csv,6.0,6.0
+sibling_bundle,portfolio,available_not_aligned,Portfolio candidate exists but does not align to the sibling facility universe.,D:\Jane\Job Search\Github\credit-risk-portfolio_bank\credit risk models commercial\expected loss engine commercial\data\input\portfolio_input.csv,180.0,0.0
+sibling_bundle,portfolio,loaded,Loaded aligned sibling/local portfolio candidate.,D:\Jane\Job Search\Github\credit-risk-portfolio_bank\credit risk models commercial\PD and score card commercial\outputs\samples\demo_input.csv,6.0,6.0
+sibling_bundle,industry_scores,loaded,Loaded sibling industry risk scores.,D:\Jane\Job Search\Github\credit-risk-portfolio_bank\credit risk models commercial\industry risk analysis\outputs\tables\industry_risk_score_table.csv,6.0,
+sibling_bundle,industry_downturns,loaded,Loaded sibling industry downturn overlays.,D:\Jane\Job Search\Github\credit-risk-portfolio_bank\credit risk models commercial\industry risk analysis\outputs\tables\downturn_overlay_table.csv,6.0,
+sibling_bundle,downturn_overlays,loaded,Loaded local scenario overlay table.,D:\Jane\Job Search\Github\credit-risk-portfolio_bank\credit risk models commercial\expected loss engine commercial\data\input\downturn_overlays.csv,3.0,
+sibling_bundle,strategy,selected,Using aligned sibling PD/LGD/EAD exports with a local or sibling portfolio anchor.,,,6.0

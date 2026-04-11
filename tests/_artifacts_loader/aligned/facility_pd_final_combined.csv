@@ -1,0 +1,3 @@
+facility_id,pd_model_stream,score,score_band,risk_grade,pd_final,default_horizon_months,pd_model_name,pd_model_version,as_of_date
+FAC-1,cashflow,650,C,RG3,0.04,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-2,property,720,B,RG2,0.02,12,property_logistic_scorecard,v1.0,2026-04-09

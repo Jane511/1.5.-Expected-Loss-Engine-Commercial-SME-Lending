@@ -1,0 +1,7 @@
+industry,facility_count,borrower_count,total_ead,total_el,ead_share,el_share,hhi_contribution,breach_flag
+Accommodation and Food Services,1,1,2160000.0,7992.0,0.374318,0.199387,0.140114,True
+Manufacturing,1,1,1198500.0,6626.89,0.207694,0.16533,0.043137,False
+Wholesale Trade,1,1,980000.0,1911.0,0.169829,0.047676,0.028842,False
+Construction,1,1,761500.0,19335.54,0.131964,0.482389,0.017414,False
+Retail Trade,1,1,385500.0,3875.45,0.066805,0.096686,0.004463,False
+Professional Services,1,1,285000.0,342.0,0.049389,0.008532,0.002439,False

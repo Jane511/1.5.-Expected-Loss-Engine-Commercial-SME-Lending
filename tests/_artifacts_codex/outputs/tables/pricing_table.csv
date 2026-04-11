@@ -1,0 +1,4 @@
+product_type,facility_count,total_ead,el_rate,average_interest_rate,required_margin,pricing_gap,share_meeting_hurdle
+Overdraft / Revolving Working Capital,58,39359736.64,0.045665,0.107623,0.095665,0.011957,0.7759
+Property Backed Loan,58,171287906.78,0.01091,0.077846,0.06091,0.016936,0.9655
+SME Cash Flow Term Loan,64,70354708.4,0.032831,0.093125,0.082831,0.010294,0.8594

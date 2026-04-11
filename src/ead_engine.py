@@ -20,8 +20,14 @@ def _is_revolving(df: pd.DataFrame) -> pd.Series:
 
 def assign_ccf_bucket(df: pd.DataFrame) -> pd.Series:
     risk_grade = _risk_grade_series(df)
-    watchlist = df.get("watchlist_flag", pd.Series(0, index=df.index)).fillna(0).astype(int)
-    arrears = df.get("arrears_days", pd.Series(0, index=df.index)).fillna(0)
+    watchlist = pd.to_numeric(
+        df.get("watchlist_flag", pd.Series(0, index=df.index)),
+        errors="coerce",
+    ).fillna(0).astype(int)
+    arrears = pd.to_numeric(
+        df.get("arrears_days", pd.Series(0, index=df.index)),
+        errors="coerce",
+    ).fillna(0)
     revolving = _is_revolving(df)
 
     weak = revolving & ((watchlist == 1) | (arrears >= 30) | risk_grade.isin(["RG4", "RG5"]))
@@ -37,9 +43,26 @@ def assign_ccf_bucket(df: pd.DataFrame) -> pd.Series:
 def add_ead_columns(df: pd.DataFrame, ccf_multiplier: float = 1.0) -> pd.DataFrame:
     out = df.copy()
     revolving = _is_revolving(out)
-    out["undrawn_amount"] = (out["limit_amount"] - out["drawn_balance"]).clip(lower=0.0)
-    out["ccf_bucket"] = assign_ccf_bucket(out)
-    out["ccf_base"] = out["ccf_bucket"].map(CCF_LOOKUP).fillna(0.0)
+    if "undrawn_amount" in out.columns:
+        out["undrawn_amount"] = out["undrawn_amount"].fillna(
+            (out["limit_amount"] - out["drawn_balance"]).clip(lower=0.0)
+        )
+    else:
+        out["undrawn_amount"] = (out["limit_amount"] - out["drawn_balance"]).clip(lower=0.0)
+
+    derived_bucket = assign_ccf_bucket(out)
+    if "ccf_bucket" in out.columns:
+        out["ccf_bucket"] = out["ccf_bucket"].fillna(derived_bucket)
+    else:
+        out["ccf_bucket"] = derived_bucket
+
+    if "ccf_base" in out.columns:
+        out["ccf_base"] = pd.to_numeric(out["ccf_base"], errors="coerce").fillna(
+            out["ccf_bucket"].map(CCF_LOOKUP).fillna(0.0)
+        )
+    else:
+        out["ccf_base"] = out["ccf_bucket"].map(CCF_LOOKUP).fillna(0.0)
+
     out["ccf_applied"] = np.where(revolving, np.minimum(out["ccf_base"] * ccf_multiplier, 1.0), 0.0)
     out["ead"] = np.where(
         revolving,
@@ -48,4 +71,3 @@ def add_ead_columns(df: pd.DataFrame, ccf_multiplier: float = 1.0) -> pd.DataFra
     )
     out["ead"] = out["ead"].round(2)
     return out
-

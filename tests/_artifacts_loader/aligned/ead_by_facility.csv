@@ -1,0 +1,2 @@
+facility_id,limit,drawn,undrawn,utilisation,base_ccf,downturn_ccf,ead_central,ead_downturn
+FAC-1,1000000,800000,200000,0.8,0.3,0.4,860000,880000

@@ -1,0 +1,4 @@
+ifrs9_stage,stage_label,facility_count,total_ead,total_ecl_provision,ecl_coverage_ratio,avg_pd,avg_lgd,share_of_portfolio_ead,share_of_portfolio_ecl
+1,Performing,4,4623500.0,16871.89,0.003649,0.029261,0.126389,0.8012,0.3684
+2,Under-performing (SICR),2,1147000.0,28921.02,0.025214,0.053155,0.367358,0.1988,0.6316
+0,Total Portfolio,6,5770500.0,45792.91,0.007936,0.034011,0.174286,1.0,1.0

@@ -1,0 +1,181 @@
+facility_id,borrower_id,borrower_name,product_type,pd_model_stream,industry,property_segment,score,score_band,risk_grade,pd_final,default_horizon_months,pd_model_name,pd_model_version,as_of_date
+FAC-00001,BOR-0001,Borrower 0001,Overdraft / Revolving Working Capital,cashflow,Construction,,661,C,RG3,0.053,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00002,BOR-0002,Borrower 0002,Property Backed Loan,property,Health Care and Social Assistance,Commercial Property,730,B,RG2,0.021,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00003,BOR-0003,Borrower 0003,SME Cash Flow Term Loan,cashflow,Health Care and Social Assistance,,730,B,RG2,0.0228,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00004,BOR-0004,Borrower 0004,Overdraft / Revolving Working Capital,cashflow,Accommodation and Food Services,,663,C,RG3,0.0535,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00005,BOR-0005,Borrower 0005,Property Backed Loan,property,"Agriculture, Forestry and Fishing",Residential Investment Property,666,C,RG3,0.0447,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00006,BOR-0006,Borrower 0006,Overdraft / Revolving Working Capital,cashflow,Health Care and Social Assistance,,662,C,RG3,0.0515,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00007,BOR-0007,Borrower 0007,SME Cash Flow Term Loan,cashflow,Health Care and Social Assistance,,727,B,RG2,0.0228,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00008,BOR-0008,Borrower 0008,Overdraft / Revolving Working Capital,cashflow,Health Care and Social Assistance,,667,C,RG3,0.0474,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00009,BOR-0009,Borrower 0009,SME Cash Flow Term Loan,cashflow,"Professional, Scientific and Technical Services",,728,B,RG2,0.0228,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00010,BOR-0010,Borrower 0010,SME Cash Flow Term Loan,cashflow,Wholesale Trade,,728,B,RG2,0.0232,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00011,BOR-0011,Borrower 0011,SME Cash Flow Term Loan,cashflow,Retail Trade,,672,C,RG3,0.0436,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00012,BOR-0012,Borrower 0012,Property Backed Loan,property,Retail Trade,Commercial Property,675,C,RG3,0.0403,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00013,BOR-0013,Borrower 0013,Overdraft / Revolving Working Capital,cashflow,"Transport, Postal and Warehousing",,675,C,RG3,0.0484,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00014,BOR-0014,Borrower 0014,Overdraft / Revolving Working Capital,cashflow,"Transport, Postal and Warehousing",,675,C,RG3,0.0484,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00015,BOR-0015,Borrower 0015,SME Cash Flow Term Loan,cashflow,Health Care and Social Assistance,,724,B,RG2,0.0228,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00016,BOR-0016,Borrower 0016,SME Cash Flow Term Loan,cashflow,Health Care and Social Assistance,,666,C,RG3,0.0465,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00017,BOR-0017,Borrower 0017,Overdraft / Revolving Working Capital,cashflow,Accommodation and Food Services,,490,E,RG5,0.2226,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00018,BOR-0018,Borrower 0018,Property Backed Loan,property,"Agriculture, Forestry and Fishing",Commercial Property,730,B,RG2,0.0218,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00019,BOR-0019,Borrower 0019,SME Cash Flow Term Loan,cashflow,Retail Trade,,595,D,RG4,0.0919,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00020,BOR-0020,Borrower 0020,SME Cash Flow Term Loan,cashflow,Construction,,665,C,RG3,0.0481,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00021,BOR-0021,Borrower 0021,SME Cash Flow Term Loan,cashflow,Accommodation and Food Services,,660,C,RG3,0.0485,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00022,BOR-0022,Borrower 0022,Overdraft / Revolving Working Capital,cashflow,"Agriculture, Forestry and Fishing",,655,C,RG3,0.0529,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00023,BOR-0023,Borrower 0023,Property Backed Loan,property,Retail Trade,Commercial Property,730,B,RG2,0.0216,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00024,BOR-0024,Borrower 0024,SME Cash Flow Term Loan,cashflow,Wholesale Trade,,730,B,RG2,0.0232,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00025,BOR-0025,Borrower 0025,SME Cash Flow Term Loan,cashflow,Construction,,730,B,RG2,0.0236,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00026,BOR-0026,Borrower 0026,Property Backed Loan,property,"Professional, Scientific and Technical Services",Commercial Property,780,A,RG1,0.0115,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00027,BOR-0027,Borrower 0027,Property Backed Loan,property,Health Care and Social Assistance,Residential Investment Property,723,B,RG2,0.021,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00028,BOR-0028,Borrower 0028,Overdraft / Revolving Working Capital,cashflow,Health Care and Social Assistance,,657,C,RG3,0.0515,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00029,BOR-0029,Borrower 0029,Property Backed Loan,property,"Agriculture, Forestry and Fishing",Commercial Property,725,B,RG2,0.0218,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00030,BOR-0030,Borrower 0030,Overdraft / Revolving Working Capital,cashflow,Accommodation and Food Services,,661,C,RG3,0.0535,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00031,BOR-0031,Borrower 0031,SME Cash Flow Term Loan,cashflow,Manufacturing,,484,E,RG5,0.2035,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00032,BOR-0032,Borrower 0032,SME Cash Flow Term Loan,cashflow,"Agriculture, Forestry and Fishing",,664,C,RG3,0.048,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00033,BOR-0033,Borrower 0033,Property Backed Loan,property,"Agriculture, Forestry and Fishing",Residential Investment Property,672,C,RG3,0.0406,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00034,BOR-0034,Borrower 0034,Property Backed Loan,property,Manufacturing,Residential Investment Property,722,B,RG2,0.0219,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00035,BOR-0035,Borrower 0035,Property Backed Loan,property,"Transport, Postal and Warehousing",Commercial Property,726,B,RG2,0.0215,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00036,BOR-0036,Borrower 0036,SME Cash Flow Term Loan,cashflow,"Agriculture, Forestry and Fishing",,666,C,RG3,0.048,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00037,BOR-0037,Borrower 0037,SME Cash Flow Term Loan,cashflow,Accommodation and Food Services,,727,B,RG2,0.0238,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00038,BOR-0038,Borrower 0038,SME Cash Flow Term Loan,cashflow,Wholesale Trade,,666,C,RG3,0.0473,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00039,BOR-0039,Borrower 0039,SME Cash Flow Term Loan,cashflow,Health Care and Social Assistance,,661,C,RG3,0.0465,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00040,BOR-0040,Borrower 0040,Property Backed Loan,property,Construction,Commercial Property,714,B,RG2,0.0241,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00041,BOR-0041,Borrower 0041,Property Backed Loan,property,Construction,Residential Investment Property,667,C,RG3,0.0448,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00042,BOR-0042,Borrower 0042,Overdraft / Revolving Working Capital,cashflow,Accommodation and Food Services,,594,D,RG4,0.103,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00043,BOR-0043,Borrower 0043,Property Backed Loan,property,Construction,Residential Investment Property,730,B,RG2,0.0219,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00044,BOR-0044,Borrower 0044,Overdraft / Revolving Working Capital,cashflow,Construction,,604,D,RG4,0.0943,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00045,BOR-0045,Borrower 0045,Property Backed Loan,property,Retail Trade,Residential Investment Property,730,B,RG2,0.0216,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00046,BOR-0046,Borrower 0046,Overdraft / Revolving Working Capital,cashflow,"Professional, Scientific and Technical Services",,589,D,RG4,0.0994,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00047,BOR-0047,Borrower 0047,Overdraft / Revolving Working Capital,cashflow,Construction,,593,D,RG4,0.1022,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00048,BOR-0048,Borrower 0048,Property Backed Loan,property,Retail Trade,Commercial Property,730,B,RG2,0.0216,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00049,BOR-0049,Borrower 0049,SME Cash Flow Term Loan,cashflow,"Agriculture, Forestry and Fishing",,730,B,RG2,0.0235,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00050,BOR-0050,Borrower 0050,SME Cash Flow Term Loan,cashflow,Wholesale Trade,,662,C,RG3,0.0473,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00051,BOR-0051,Borrower 0051,Overdraft / Revolving Working Capital,cashflow,Construction,,662,C,RG3,0.053,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00052,BOR-0052,Borrower 0052,Property Backed Loan,property,"Professional, Scientific and Technical Services",Residential Investment Property,780,A,RG1,0.0115,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00053,BOR-0053,Borrower 0053,SME Cash Flow Term Loan,cashflow,"Transport, Postal and Warehousing",,662,C,RG3,0.0475,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00054,BOR-0054,Borrower 0054,Overdraft / Revolving Working Capital,cashflow,"Agriculture, Forestry and Fishing",,661,C,RG3,0.0529,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00055,BOR-0055,Borrower 0055,SME Cash Flow Term Loan,cashflow,Construction,,658,C,RG3,0.0481,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00056,BOR-0056,Borrower 0056,Overdraft / Revolving Working Capital,cashflow,"Agriculture, Forestry and Fishing",,655,C,RG3,0.0529,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00057,BOR-0057,Borrower 0057,Overdraft / Revolving Working Capital,cashflow,Manufacturing,,675,C,RG3,0.0491,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00058,BOR-0058,Borrower 0058,Overdraft / Revolving Working Capital,cashflow,"Agriculture, Forestry and Fishing",,669,C,RG3,0.0488,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00059,BOR-0059,Borrower 0059,Overdraft / Revolving Working Capital,cashflow,"Agriculture, Forestry and Fishing",,602,D,RG4,0.1019,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00060,BOR-0060,Borrower 0060,SME Cash Flow Term Loan,cashflow,Construction,,596,D,RG4,0.0927,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00061,BOR-0061,Borrower 0061,Property Backed Loan,property,Wholesale Trade,Residential Investment Property,730,B,RG2,0.0214,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00062,BOR-0062,Borrower 0062,Property Backed Loan,property,Manufacturing,Residential Investment Property,490,E,RG5,0.2035,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00063,BOR-0063,Borrower 0063,Overdraft / Revolving Working Capital,cashflow,"Transport, Postal and Warehousing",,672,C,RG3,0.0484,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00064,BOR-0064,Borrower 0064,SME Cash Flow Term Loan,cashflow,Construction,,670,C,RG3,0.044,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00065,BOR-0065,Borrower 0065,Property Backed Loan,property,"Agriculture, Forestry and Fishing",Commercial Property,728,B,RG2,0.0218,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00066,BOR-0066,Borrower 0066,Overdraft / Revolving Working Capital,cashflow,Construction,,595,D,RG4,0.1022,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00067,BOR-0067,Borrower 0067,Overdraft / Revolving Working Capital,cashflow,Wholesale Trade,,489,E,RG5,0.2179,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00068,BOR-0068,Borrower 0068,SME Cash Flow Term Loan,cashflow,Health Care and Social Assistance,,715,B,RG2,0.025,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00069,BOR-0069,Borrower 0069,Overdraft / Revolving Working Capital,cashflow,"Agriculture, Forestry and Fishing",,594,D,RG4,0.1019,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00070,BOR-0070,Borrower 0070,Property Backed Loan,property,Accommodation and Food Services,Commercial Property,723,B,RG2,0.0221,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00071,BOR-0071,Borrower 0071,Overdraft / Revolving Working Capital,cashflow,Wholesale Trade,,666,C,RG3,0.0522,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00072,BOR-0072,Borrower 0072,Property Backed Loan,property,Wholesale Trade,Commercial Property,656,C,RG3,0.044,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00073,BOR-0073,Borrower 0073,Property Backed Loan,property,Construction,Residential Investment Property,669,C,RG3,0.0407,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00074,BOR-0074,Borrower 0074,SME Cash Flow Term Loan,cashflow,Health Care and Social Assistance,,730,B,RG2,0.0228,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00075,BOR-0075,Borrower 0075,SME Cash Flow Term Loan,cashflow,Retail Trade,,729,B,RG2,0.0234,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00076,BOR-0076,Borrower 0076,SME Cash Flow Term Loan,cashflow,Manufacturing,,670,C,RG3,0.0442,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00077,BOR-0077,Borrower 0077,Property Backed Loan,property,Accommodation and Food Services,Residential Investment Property,660,C,RG3,0.0453,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00078,BOR-0078,Borrower 0078,Overdraft / Revolving Working Capital,cashflow,"Transport, Postal and Warehousing",,668,C,RG3,0.0484,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00079,BOR-0079,Borrower 0079,Property Backed Loan,property,Retail Trade,Residential Investment Property,724,B,RG2,0.0216,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00080,BOR-0080,Borrower 0080,SME Cash Flow Term Loan,cashflow,Wholesale Trade,,725,B,RG2,0.0232,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00081,BOR-0081,Borrower 0081,SME Cash Flow Term Loan,cashflow,Manufacturing,,660,C,RG3,0.0483,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00082,BOR-0082,Borrower 0082,Property Backed Loan,property,"Transport, Postal and Warehousing",Commercial Property,661,C,RG3,0.0443,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00083,BOR-0083,Borrower 0083,Overdraft / Revolving Working Capital,cashflow,"Transport, Postal and Warehousing",,667,C,RG3,0.0525,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00084,BOR-0084,Borrower 0084,Overdraft / Revolving Working Capital,cashflow,"Agriculture, Forestry and Fishing",,601,D,RG4,0.1019,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00085,BOR-0085,Borrower 0085,SME Cash Flow Term Loan,cashflow,Construction,,668,C,RG3,0.044,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00086,BOR-0086,Borrower 0086,Overdraft / Revolving Working Capital,cashflow,Manufacturing,,492,E,RG5,0.2215,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00087,BOR-0087,Borrower 0087,SME Cash Flow Term Loan,cashflow,Accommodation and Food Services,,654,C,RG3,0.0485,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00088,BOR-0088,Borrower 0088,Property Backed Loan,property,Health Care and Social Assistance,Commercial Property,666,C,RG3,0.0433,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00089,BOR-0089,Borrower 0089,SME Cash Flow Term Loan,cashflow,Retail Trade,,675,C,RG3,0.0436,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00090,BOR-0090,Borrower 0090,Property Backed Loan,property,Manufacturing,Residential Investment Property,660,C,RG3,0.045,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00091,BOR-0001,Borrower 0001,SME Cash Flow Term Loan,cashflow,Manufacturing,,667,C,RG3,0.0442,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00092,BOR-0002,Borrower 0002,SME Cash Flow Term Loan,cashflow,Manufacturing,,730,B,RG2,0.0237,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00093,BOR-0003,Borrower 0003,Property Backed Loan,property,Wholesale Trade,Commercial Property,727,B,RG2,0.0214,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00094,BOR-0004,Borrower 0004,Overdraft / Revolving Working Capital,cashflow,Wholesale Trade,,669,C,RG3,0.0481,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00095,BOR-0005,Borrower 0005,SME Cash Flow Term Loan,cashflow,Wholesale Trade,,486,E,RG5,0.1999,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00096,BOR-0006,Borrower 0006,Overdraft / Revolving Working Capital,cashflow,"Professional, Scientific and Technical Services",,730,B,RG2,0.0255,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00097,BOR-0007,Borrower 0007,Overdraft / Revolving Working Capital,cashflow,Health Care and Social Assistance,,566,D,RG4,0.1134,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00098,BOR-0008,Borrower 0008,Property Backed Loan,property,"Professional, Scientific and Technical Services",Commercial Property,723,B,RG2,0.0211,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00099,BOR-0009,Borrower 0009,Property Backed Loan,property,Retail Trade,Commercial Property,730,B,RG2,0.0216,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00100,BOR-0010,Borrower 0010,SME Cash Flow Term Loan,cashflow,Construction,,670,C,RG3,0.044,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00101,BOR-0011,Borrower 0011,Property Backed Loan,property,"Transport, Postal and Warehousing",Commercial Property,665,C,RG3,0.0443,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00102,BOR-0012,Borrower 0012,Overdraft / Revolving Working Capital,cashflow,"Transport, Postal and Warehousing",,675,C,RG3,0.0484,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00103,BOR-0013,Borrower 0013,Overdraft / Revolving Working Capital,cashflow,Health Care and Social Assistance,,658,C,RG3,0.0515,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00104,BOR-0014,Borrower 0014,SME Cash Flow Term Loan,cashflow,Manufacturing,,556,D,RG4,0.1072,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00105,BOR-0015,Borrower 0015,SME Cash Flow Term Loan,cashflow,Manufacturing,,668,C,RG3,0.0442,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00106,BOR-0016,Borrower 0016,Overdraft / Revolving Working Capital,cashflow,Health Care and Social Assistance,,730,B,RG2,0.0254,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00107,BOR-0017,Borrower 0017,SME Cash Flow Term Loan,cashflow,Health Care and Social Assistance,,723,B,RG2,0.0228,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00108,BOR-0018,Borrower 0018,Property Backed Loan,property,Accommodation and Food Services,Commercial Property,718,B,RG2,0.0243,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00109,BOR-0019,Borrower 0019,Overdraft / Revolving Working Capital,cashflow,Wholesale Trade,,656,C,RG3,0.0522,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00110,BOR-0020,Borrower 0020,Overdraft / Revolving Working Capital,cashflow,Retail Trade,,665,C,RG3,0.0526,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00111,BOR-0021,Borrower 0021,Overdraft / Revolving Working Capital,cashflow,Construction,,675,C,RG3,0.0489,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00112,BOR-0022,Borrower 0022,SME Cash Flow Term Loan,cashflow,Wholesale Trade,,780,A,RG1,0.0126,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00113,BOR-0023,Borrower 0023,Overdraft / Revolving Working Capital,cashflow,Accommodation and Food Services,,675,C,RG3,0.0494,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00114,BOR-0024,Borrower 0024,Overdraft / Revolving Working Capital,cashflow,Accommodation and Food Services,,675,C,RG3,0.0494,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00115,BOR-0025,Borrower 0025,SME Cash Flow Term Loan,cashflow,Health Care and Social Assistance,,723,B,RG2,0.0228,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00116,BOR-0026,Borrower 0026,SME Cash Flow Term Loan,cashflow,Manufacturing,,657,C,RG3,0.0483,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00117,BOR-0027,Borrower 0027,Property Backed Loan,property,Wholesale Trade,Commercial Property,721,B,RG2,0.0236,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00118,BOR-0028,Borrower 0028,Property Backed Loan,property,"Agriculture, Forestry and Fishing",Commercial Property,663,C,RG3,0.0447,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00119,BOR-0029,Borrower 0029,SME Cash Flow Term Loan,cashflow,Manufacturing,,555,D,RG4,0.1072,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00120,BOR-0030,Borrower 0030,SME Cash Flow Term Loan,cashflow,Retail Trade,,722,B,RG2,0.0234,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00121,BOR-0031,Borrower 0031,Overdraft / Revolving Working Capital,cashflow,Construction,,730,B,RG2,0.0263,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00122,BOR-0032,Borrower 0032,Property Backed Loan,property,"Professional, Scientific and Technical Services",Residential Investment Property,730,B,RG2,0.0211,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00123,BOR-0033,Borrower 0033,Overdraft / Revolving Working Capital,cashflow,Wholesale Trade,,668,C,RG3,0.0481,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00124,BOR-0034,Borrower 0034,Overdraft / Revolving Working Capital,cashflow,Wholesale Trade,,660,C,RG3,0.0522,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00125,BOR-0035,Borrower 0035,SME Cash Flow Term Loan,cashflow,"Professional, Scientific and Technical Services",,668,C,RG3,0.0426,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00126,BOR-0036,Borrower 0036,SME Cash Flow Term Loan,cashflow,"Professional, Scientific and Technical Services",,658,C,RG3,0.0467,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00127,BOR-0037,Borrower 0037,Property Backed Loan,property,Manufacturing,Residential Investment Property,576,D,RG4,0.1009,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00128,BOR-0038,Borrower 0038,Property Backed Loan,property,Manufacturing,Residential Investment Property,730,B,RG2,0.0219,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00129,BOR-0039,Borrower 0039,SME Cash Flow Term Loan,cashflow,"Professional, Scientific and Technical Services",,662,C,RG3,0.0467,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00130,BOR-0040,Borrower 0040,Property Backed Loan,property,Health Care and Social Assistance,Commercial Property,730,B,RG2,0.021,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00131,BOR-0041,Borrower 0041,Overdraft / Revolving Working Capital,cashflow,Health Care and Social Assistance,,665,C,RG3,0.0515,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00132,BOR-0042,Borrower 0042,Property Backed Loan,property,Accommodation and Food Services,Commercial Property,728,B,RG2,0.0221,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00133,BOR-0043,Borrower 0043,SME Cash Flow Term Loan,cashflow,Manufacturing,,730,B,RG2,0.0237,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00134,BOR-0044,Borrower 0044,Overdraft / Revolving Working Capital,cashflow,Retail Trade,,488,E,RG5,0.2194,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00135,BOR-0045,Borrower 0045,Overdraft / Revolving Working Capital,cashflow,Retail Trade,,668,C,RG3,0.0485,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00136,BOR-0046,Borrower 0046,Property Backed Loan,property,"Transport, Postal and Warehousing",Residential Investment Property,730,B,RG2,0.0215,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00137,BOR-0047,Borrower 0047,SME Cash Flow Term Loan,cashflow,Manufacturing,,730,B,RG2,0.0237,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00138,BOR-0048,Borrower 0048,Overdraft / Revolving Working Capital,cashflow,Construction,,673,C,RG3,0.0489,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00139,BOR-0049,Borrower 0049,SME Cash Flow Term Loan,cashflow,"Transport, Postal and Warehousing",,730,B,RG2,0.0233,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00140,BOR-0050,Borrower 0050,SME Cash Flow Term Loan,cashflow,Health Care and Social Assistance,,667,C,RG3,0.0424,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00141,BOR-0051,Borrower 0051,SME Cash Flow Term Loan,cashflow,Retail Trade,,730,B,RG2,0.0234,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00142,BOR-0052,Borrower 0052,Property Backed Loan,property,"Transport, Postal and Warehousing",Commercial Property,596,D,RG4,0.0853,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00143,BOR-0053,Borrower 0053,Property Backed Loan,property,Construction,Commercial Property,726,B,RG2,0.0219,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00144,BOR-0054,Borrower 0054,Property Backed Loan,property,"Professional, Scientific and Technical Services",Commercial Property,727,B,RG2,0.0211,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00145,BOR-0055,Borrower 0055,Overdraft / Revolving Working Capital,cashflow,Health Care and Social Assistance,,669,C,RG3,0.0474,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00146,BOR-0056,Borrower 0056,SME Cash Flow Term Loan,cashflow,Retail Trade,,496,E,RG5,0.2014,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00147,BOR-0057,Borrower 0057,Property Backed Loan,property,Health Care and Social Assistance,Commercial Property,662,C,RG3,0.0433,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00148,BOR-0058,Borrower 0058,Property Backed Loan,property,"Agriculture, Forestry and Fishing",Commercial Property,730,B,RG2,0.0218,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00149,BOR-0059,Borrower 0059,SME Cash Flow Term Loan,cashflow,"Professional, Scientific and Technical Services",,730,B,RG2,0.0228,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00150,BOR-0060,Borrower 0060,Property Backed Loan,property,"Transport, Postal and Warehousing",Commercial Property,729,B,RG2,0.0215,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00151,BOR-0061,Borrower 0061,Property Backed Loan,property,Construction,Commercial Property,549,D,RG4,0.1006,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00152,BOR-0062,Borrower 0062,Property Backed Loan,property,Wholesale Trade,Residential Investment Property,654,C,RG3,0.044,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00153,BOR-0063,Borrower 0063,SME Cash Flow Term Loan,cashflow,Health Care and Social Assistance,,641,C,RG3,0.0539,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00154,BOR-0064,Borrower 0064,Overdraft / Revolving Working Capital,cashflow,Wholesale Trade,,662,C,RG3,0.0522,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00155,BOR-0065,Borrower 0065,Overdraft / Revolving Working Capital,cashflow,Accommodation and Food Services,,675,C,RG3,0.0494,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00156,BOR-0066,Borrower 0066,SME Cash Flow Term Loan,cashflow,"Agriculture, Forestry and Fishing",,666,C,RG3,0.048,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00157,BOR-0067,Borrower 0067,Property Backed Loan,property,"Agriculture, Forestry and Fishing",Commercial Property,730,B,RG2,0.0218,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00158,BOR-0068,Borrower 0068,Property Backed Loan,property,Retail Trade,Commercial Property,726,B,RG2,0.0216,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00159,BOR-0069,Borrower 0069,Overdraft / Revolving Working Capital,cashflow,Retail Trade,,664,C,RG3,0.0526,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00160,BOR-0070,Borrower 0070,Overdraft / Revolving Working Capital,cashflow,Wholesale Trade,,568,D,RG4,0.1147,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00161,BOR-0071,Borrower 0071,SME Cash Flow Term Loan,cashflow,Construction,,489,E,RG5,0.203,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00162,BOR-0072,Borrower 0072,SME Cash Flow Term Loan,cashflow,Manufacturing,,494,E,RG5,0.2035,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00163,BOR-0073,Borrower 0073,Property Backed Loan,property,Manufacturing,Commercial Property,727,B,RG2,0.0219,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00164,BOR-0074,Borrower 0074,Property Backed Loan,property,"Transport, Postal and Warehousing",Residential Investment Property,725,B,RG2,0.0215,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00165,BOR-0075,Borrower 0075,SME Cash Flow Term Loan,cashflow,Health Care and Social Assistance,,722,B,RG2,0.0228,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00166,BOR-0076,Borrower 0076,SME Cash Flow Term Loan,cashflow,"Transport, Postal and Warehousing",,657,C,RG3,0.0475,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00167,BOR-0077,Borrower 0077,SME Cash Flow Term Loan,cashflow,Wholesale Trade,,675,C,RG3,0.0432,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00168,BOR-0078,Borrower 0078,Overdraft / Revolving Working Capital,cashflow,Health Care and Social Assistance,,666,C,RG3,0.0515,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00169,BOR-0079,Borrower 0079,Property Backed Loan,property,Construction,Commercial Property,730,B,RG2,0.0219,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00170,BOR-0080,Borrower 0080,Property Backed Loan,property,Health Care and Social Assistance,Commercial Property,657,C,RG3,0.0433,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00171,BOR-0081,Borrower 0081,Property Backed Loan,property,"Agriculture, Forestry and Fishing",Commercial Property,657,C,RG3,0.0447,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00172,BOR-0082,Borrower 0082,SME Cash Flow Term Loan,cashflow,Retail Trade,,667,C,RG3,0.0477,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00173,BOR-0083,Borrower 0083,Overdraft / Revolving Working Capital,cashflow,"Transport, Postal and Warehousing",,675,C,RG3,0.0484,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00174,BOR-0084,Borrower 0084,Overdraft / Revolving Working Capital,cashflow,"Professional, Scientific and Technical Services",,666,C,RG3,0.0516,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00175,BOR-0085,Borrower 0085,Overdraft / Revolving Working Capital,cashflow,"Professional, Scientific and Technical Services",,675,C,RG3,0.0475,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00176,BOR-0086,Borrower 0086,Property Backed Loan,property,Construction,Residential Investment Property,730,B,RG2,0.0219,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00177,BOR-0087,Borrower 0087,Property Backed Loan,property,Construction,Residential Investment Property,730,B,RG2,0.0219,12,property_logistic_scorecard,v1.0,2026-04-09
+FAC-00178,BOR-0088,Borrower 0088,Overdraft / Revolving Working Capital,cashflow,Construction,,656,C,RG3,0.053,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00179,BOR-0089,Borrower 0089,SME Cash Flow Term Loan,cashflow,"Transport, Postal and Warehousing",,675,C,RG3,0.0434,12,cashflow_logistic_scorecard,v1.0,2026-04-09
+FAC-00180,BOR-0090,Borrower 0090,Overdraft / Revolving Working Capital,cashflow,"Professional, Scientific and Technical Services",,653,C,RG3,0.0516,12,cashflow_logistic_scorecard,v1.0,2026-04-09

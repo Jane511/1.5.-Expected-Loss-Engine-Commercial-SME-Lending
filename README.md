@@ -7,50 +7,58 @@ This repo is the downstream integration engine for expected loss for a bank-styl
 ## Where it sits in the full credit-risk stack
 
 Upstream inputs:
-- PD-and-Scorecard-Cashflow-Lending
-- LGD-Cashflow-and-Property-Lending
-- EAD-CCF-Cashflow-Lending
-- industry_analysis
+- PD-and-scorecard-commercial
+- LGD-commercial
+- EAD-CCF-commercial
+- industry-analysis
 
 Downstream consumers:
-- Stress-Testing-Credit-Portfolio
-- Risk-Based-Pricing-Credit
-- Portfolio-Monitoring-MIS
-- RWA-Capital-Credit-Risk
+- stress-testing-commercial
+- RAROC-pricing-and-return-hurdle
+- planned portfolio-monitoring consumer
+- RWA-capital-commercial
 
 ## Inputs
 
-The demo pipeline uses `data/raw/demo_portfolio.csv`, generated automatically when missing. The fields cover borrower IDs, facility IDs, segment, industry, product type, limit, drawn balance, collateral, PD, LGD, EAD, and borrower financial metrics.
+The canonical pipeline first tries to reconcile the current sibling-repo exports on their shared facility universe. It uses a local `data/input/portfolio_input.csv` when that file aligns, otherwise it falls back to an aligned sibling sample portfolio. The local staged bundle under `data/input/` is used only when no coherent sibling bundle is available. Demo inputs are generated only when no coherent local or sibling bundle is available, or when `--refresh-demo-inputs` is used.
 
 ## What the pipeline does
 
-It loads demo data, builds reusable credit features, runs the `el` engine, validates the outputs, and writes downstream-friendly CSV files.
+It loads the selected input bundle, assembles a facility-level EL dataset, attaches optional external EAD and industry context, computes IFRS 9 staging/ECL, pricing, stress, and concentration outputs, validates the run, and writes downstream-friendly CSV files plus a chart pack under `outputs/charts/` including the EL waterfall, risk-grade distribution, concentration heatmap, and stress comparison.
 
 ## Outputs
 
-- `outputs/tables/expected_loss_by_facility.csv`
-- `outputs/tables/expected_loss_by_borrower.csv`
-- `outputs/tables/expected_loss_by_segment.csv`
-- `outputs/tables/portfolio_expected_loss.csv`
-- `outputs/tables/scenario_weighted_ecl.csv`
+- `outputs/tables/loan_level_el.csv`
+- `outputs/tables/segment_expected_loss_summary.csv`
+- `outputs/tables/portfolio_summary.csv`
+- `outputs/tables/pricing_table.csv`
+- `outputs/tables/stress_test_results.csv`
+- `outputs/tables/ifrs9_ecl_by_facility.csv`
+- `outputs/tables/ifrs9_stage_summary.csv`
+- `outputs/tables/concentration_by_sector.csv`
+- `outputs/tables/concentration_by_region.csv`
+- `outputs/tables/concentration_top_borrowers.csv`
+- `outputs/tables/concentration_summary.csv`
+- `outputs/tables/input_source_report.csv`
 - `outputs/tables/pipeline_validation_report.csv`
 
 ## How to run
 
 ```powershell
-python -m src.codex_run_pipeline
+python -m src.pipeline
 ```
 
-Or:
+Compatibility alias:
 
 ```powershell
-python scripts/run_codex_pipeline.py
+python -m src.codex_run_pipeline
 ```
 
 ## Limitations and synthetic-data note
 
 - Demo data is synthetic and not confidential bank data.
 - Thresholds, overlays, and formulae are transparent portfolio-demonstration assumptions.
+- The sibling-first path depends on the current downstream-friendly exports in the upstream repos. If those are replaced with incompatible legacy files, the loader will reject them and record the reason in `input_source_report.csv`.
 - Production use would require governed source data, calibration, model validation, and approval.
 
 ## How it connects to the next repo

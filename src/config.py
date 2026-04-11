@@ -7,7 +7,8 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
 INPUT_DIR = DATA_DIR / "input"
 PROCESSED_DIR = DATA_DIR / "processed"
-OUTPUT_DIR = DATA_DIR / "output"
+OUTPUT_DIR = ROOT / "outputs" / "tables"
+CHART_DIR = ROOT / "outputs" / "charts"
 DOCS_DIR = ROOT / "docs"
 NOTEBOOKS_DIR = ROOT / "notebooks"
 
@@ -27,11 +28,29 @@ DEFAULT_OUTPUT_FILES = {
 }
 
 SIBLING_INPUT_CANDIDATES = {
+    "portfolio_sample": (
+        ROOT.parent / "PD and score card commercial" / "outputs" / "samples" / "demo_input.csv",
+        ROOT.parent / "EAD CCF commercial" / "outputs" / "samples" / "demo_input.csv",
+        ROOT.parent / "LG commercial" / "outputs" / "samples" / "demo_input.csv",
+    ),
     "pd_final": (
+        ROOT.parent / "PD and score card commercial" / "outputs" / "tables" / "pd_model_output.csv",
+        ROOT.parent / "PD and score card commercial" / "output" / "pd_final" / "facility_pd_final_combined.csv",
         ROOT.parent / "1.2 PD and Score Card_Cashflow & Property backed Lending" / "output" / "pd_final" / "facility_pd_final_combined.csv",
     ),
     "lgd_final": (
+        ROOT.parent / "LG commercial" / "outputs" / "tables" / "downturn_lgd_output.csv",
+        ROOT.parent / "LG commercial" / "outputs" / "tables" / "lgd_final.csv",
         ROOT.parent / "2. APRA LGD Model" / "outputs" / "tables" / "lgd_final.csv",
+    ),
+    "ead_final": (
+        ROOT.parent / "EAD CCF commercial" / "outputs" / "tables" / "ead_by_facility.csv",
+    ),
+    "industry_scores": (
+        ROOT.parent / "industry risk analysis" / "outputs" / "tables" / "industry_risk_score_table.csv",
+    ),
+    "industry_downturns": (
+        ROOT.parent / "industry risk analysis" / "outputs" / "tables" / "downturn_overlay_table.csv",
     ),
     "industry_stress_matrix": (
         ROOT.parent / "9.Industry Risk Analysis_Australia" / "output" / "tables" / "industry_stress_test_matrix.csv",
@@ -138,4 +157,3 @@ STRESS_SCENARIOS = (
     {"scenario": "mild", "pd_multiplier": 1.25, "lgd_multiplier": 1.10, "ccf_multiplier": 1.10, "scenario_description": "Moderate deterioration in credit conditions"},
     {"scenario": "severe", "pd_multiplier": 2.00, "lgd_multiplier": 1.30, "ccf_multiplier": 1.20, "scenario_description": "Sharp downturn with weaker recoveries and higher revolver usage"},
 )
-

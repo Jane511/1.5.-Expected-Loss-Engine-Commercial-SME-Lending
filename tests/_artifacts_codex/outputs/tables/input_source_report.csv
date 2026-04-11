@@ -1,0 +1,6 @@
+strategy,source_key,status,detail,path,facility_count,shared_facility_count
+demo_generated,strategy,selected,Refreshed and persisted aligned demo inputs.,,,
+demo_generated,portfolio,generated,Generated demo portfolio.,tests\_artifacts_codex\data\input\portfolio_input.csv,180.0,
+demo_generated,pd_final,generated,Generated demo PD final layer.,tests\_artifacts_codex\data\input\facility_pd_final_combined.csv,180.0,
+demo_generated,lgd_final,generated,Generated demo LGD final layer.,tests\_artifacts_codex\data\input\lgd_final.csv,180.0,
+demo_generated,downturn_overlays,generated,Generated demo scenario overlays.,tests\_artifacts_codex\data\input\downturn_overlays.csv,3.0,

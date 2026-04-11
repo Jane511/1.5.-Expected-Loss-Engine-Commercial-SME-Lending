@@ -1,0 +1,4 @@
+scenario,pd_multiplier,lgd_multiplier,ccf_multiplier,total_ead,total_el,average_pd,average_lgd,el_rate,scenario_description,change_vs_base,pct_change_vs_base
+base,1.0,1.0,1.0,281002351.82,5975906.35,0.044138,0.420747,0.021266,Base conditions,0.0,0.0
+mild,1.25,1.1,1.1,282315684.98,8300971.5,0.055314,0.464105,0.029403,Moderate deterioration in credit conditions,2325065.15,0.389073
+severe,2.0,1.3,1.2,283629018.17,15786412.46,0.088726,0.549052,0.055659,Sharp downturn with weaker recoveries and higher revolver usage,9810506.11,1.641677

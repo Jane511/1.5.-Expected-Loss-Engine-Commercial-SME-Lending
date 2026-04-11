@@ -6,8 +6,13 @@ from .utils import weighted_average
 
 
 def _summarise_group(df: pd.DataFrame, group_fields: list[str]) -> pd.DataFrame:
+    working = df.copy()
+    for column in ["limit_amount", "drawn_balance", "interest_rate"]:
+        if column not in working.columns:
+            working[column] = pd.NA
+
     records: list[dict] = []
-    for keys, group in df.groupby(group_fields, dropna=False, sort=True):
+    for keys, group in working.groupby(group_fields, dropna=False, sort=True):
         if not isinstance(keys, tuple):
             keys = (keys,)
         row = dict(zip(group_fields, keys, strict=False))
@@ -51,4 +56,3 @@ def summarise_portfolio(df: pd.DataFrame) -> pd.DataFrame:
         ]
     )
     return pd.concat([product_summary, total_row], ignore_index=True)
-

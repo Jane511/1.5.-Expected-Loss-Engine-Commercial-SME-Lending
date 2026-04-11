@@ -1,0 +1,2 @@
+facility_id,conduct_classification,lgd_base,lgd_adj_lvr,lgd_adj_stage,lgd_adj_industry,lgd_adj_pd_band,lgd_adj_dscr,lgd_adj_conduct,lgd_adjusted,downturn_scalar,lgd_downturn,lgd_final
+OTHER-1,Green,0.42,0.0,0.0,0.01,0.0,0.0,0.0,0.43,1.1,0.473,0.473

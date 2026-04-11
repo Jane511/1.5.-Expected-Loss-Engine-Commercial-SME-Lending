@@ -1,1 +1,1 @@
-from .codex_pipeline import load_demo
+from .data_loader import load_input_tables

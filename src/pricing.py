@@ -13,6 +13,9 @@ def apply_pricing(
 ) -> pd.DataFrame:
     assumptions = pricing_assumptions or PRICING_ASSUMPTIONS
     out = df.copy()
+    if "interest_rate" not in out.columns:
+        out["interest_rate"] = np.nan
+    out["interest_rate"] = pd.to_numeric(out["interest_rate"], errors="coerce")
     out["funding_cost"] = assumptions["funding_cost"]
     out["operating_cost"] = assumptions["operating_cost"]
     out["target_return"] = assumptions["target_return"]
@@ -50,4 +53,3 @@ def summarise_pricing(df: pd.DataFrame) -> pd.DataFrame:
             }
         )
     return pd.DataFrame.from_records(records)
-
