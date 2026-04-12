@@ -17,10 +17,8 @@ Upstream inputs:
 Downstream consumers:
 - `stress-testing-commercial`
 - `RAROC-pricing-and-return-hurdle`
-- `portfolio-monitor-commercial` (planned downstream repo; not yet published on the public portfolio)
+- `portfolio-monitor-commercial`
 - `RWA-capital-commercial`
-
-Some downstream modules are planned but not yet published on the public portfolio.
 
 ## Key outputs
 
@@ -38,6 +36,7 @@ Some downstream modules are planned but not yet published on the public portfoli
 
 - `data/`: staged input bundles, processed working tables, and external reference files
 - `src/`: reusable expected loss, pricing, staging, and pipeline logic
+- `scripts/`: wrapper scripts for pipeline execution
 - `docs/`: methodology, assumptions, pricing logic, stress notes, and validation material
 - `notebooks/`: reviewer-facing walkthrough notebooks
 - `outputs/`: exported tables, charts, reports, and sample artifacts
@@ -60,4 +59,3 @@ python -m src.codex_run_pipeline
 - All inputs are synthetic or public-style demo data.
 - The integration logic is designed to be explainable and reusable rather than to mirror a production impairment engine exactly.
 - Downstream tables are intentionally flat and portable so the repo can demonstrate stack integration without relying on workspace-specific conventions.
-- Some downstream modules are planned but not yet published on the public portfolio.
