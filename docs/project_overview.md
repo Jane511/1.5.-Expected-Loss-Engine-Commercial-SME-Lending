@@ -1,8 +1,10 @@
-# Project Overview - expected-loss-engine-commercial
+# Project Overview
 
-This repo sits after the core commercial PD, LGD, and EAD components. It combines facility-level risk inputs into expected loss outputs, then rolls those results into portfolio reporting, pricing support, scenario stress testing, and capital-style downstream use.
+`expected-loss-engine-commercial` is the expected-loss integration engine in the public commercial credit-risk stack.
 
-The design goal is practical credit-risk workflow coverage rather than model-theory depth in isolation. A credit officer, portfolio manager, or private credit underwriter should be able to see how the same facility-level loss engine can support both day-to-day underwriting and book-level oversight.
+## Portfolio role
+
+It combines PD, LGD, and EAD outputs into facility- and portfolio-level expected loss views that can be reused across stress testing, monitoring, pricing, and capital workflows.
 
 ## Upstream inputs
 

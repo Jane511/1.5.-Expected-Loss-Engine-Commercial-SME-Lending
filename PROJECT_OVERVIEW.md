@@ -4,7 +4,7 @@
 
 ## Portfolio role
 
-`expected-loss-engine-commercial` is the downstream integration engine for expected loss.
+`expected-loss-engine-commercial` is the expected-loss integration engine that combines PD, LGD, and EAD into facility- and portfolio-level loss outputs.
 
 ## Upstream inputs
 
